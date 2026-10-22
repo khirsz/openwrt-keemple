@@ -1,0 +1,36 @@
+. /lib/functions.sh
+
+board=$(board_name)
+
+case "$board" in
+keemple,kp-gw-01)
+	[ -f /etc/config/ser2net ] || exit 0
+	uci -q get ser2net.zwave >/dev/null && exit 0
+
+	uci -q batch <<-EOF
+		set ser2net.zwave_led=led
+		set ser2net.zwave_led.driver='sysfs'
+		set ser2net.zwave_led.device='green:status'
+		set ser2net.zwave_led.duration='50'
+		set ser2net.zwave_led.state='1'
+
+		set ser2net.zwave=proxy
+		set ser2net.zwave.enabled='1'
+		set ser2net.zwave.port='3333'
+		set ser2net.zwave.protocol='raw'
+		set ser2net.zwave.device='/dev/ttyACM0'
+		set ser2net.zwave.baudrate='115200'
+		set ser2net.zwave.databits='8'
+		set ser2net.zwave.parity='none'
+		set ser2net.zwave.stopbits='1'
+		set ser2net.zwave.timeout='0'
+		set ser2net.zwave.local='1'
+		set ser2net.zwave.kickolduser='1'
+		set ser2net.zwave.led_tx='zwave_led'
+		set ser2net.zwave.led_rx='zwave_led'
+		commit ser2net
+	EOF
+	;;
+esac
+
+exit 0

@@ -101,7 +101,8 @@ glinet,gl-ar300m-nand|\
 glinet,gl-ar300m-nor|\
 glinet,gl-ar300m16|\
 glinet,gl-s200-nor|\
-glinet,gl-s200-nor-nand)
+glinet,gl-s200-nor-nand|\
+keemple,kp-gw-01)
 	ubootenv_add_mtd "u-boot-env" "0x0" "0x10000" "0x10000"
 	;;
 buffalo,wzr-hp-ag300h)

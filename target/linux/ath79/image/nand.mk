@@ -279,6 +279,24 @@ define Device/glinet_gl-x1200-nor
 endef
 TARGET_DEVICES += glinet_gl-x1200-nor
 
+define Device/keemple_kp-gw-01
+  SOC := qca9531
+  DEVICE_VENDOR := Keemple
+  DEVICE_MODEL := KP-GW-01
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-acm kmod-i2c-gpio kmod-gpio-pca953x \
+	kmod-ledtrig-transient ser2net
+  KERNEL_SIZE := 4096k
+  IMAGE_SIZE := 57216k
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  VID_HDR_OFFSET := 2048
+  IMAGES += factory-kernel.bin factory-ubi.bin
+  IMAGE/factory-kernel.bin := append-kernel | check-size $$$$(KERNEL_SIZE)
+  IMAGE/factory-ubi.bin := append-ubi | check-size
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += keemple_kp-gw-01
+
 define Device/linksys_ea4500-v3
   SOC := qca9558
   DEVICE_COMPAT_VERSION := 1.1
