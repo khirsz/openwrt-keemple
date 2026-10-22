@@ -112,7 +112,7 @@ define KernelPackage/gpio-pca953x
   KCONFIG:=CONFIG_GPIO_PCA953X \
 	   CONFIG_GPIO_PCA953X_IRQ=y
   FILES:=$(LINUX_DIR)/drivers/gpio/gpio-pca953x.ko
-  AUTOLOAD:=$(call AutoLoad,55,gpio-pca953x)
+  AUTOLOAD:=$(call AutoLoad,55,gpio-pca953x,1)
 endef
 
 define KernelPackage/gpio-pca953x/description

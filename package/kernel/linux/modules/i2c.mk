@@ -149,7 +149,7 @@ I2C_GPIO_MODULES:= \
   CONFIG_I2C_GPIO:drivers/i2c/busses/i2c-gpio
 
 define KernelPackage/i2c-gpio
-  $(call i2c_defaults,$(I2C_GPIO_MODULES),59)
+  $(call i2c_defaults,$(I2C_GPIO_MODULES),59,1)
   TITLE:=GPIO-based bitbanging I2C
   DEPENDS:=@GPIO_SUPPORT +kmod-i2c-algo-bit
 endef
